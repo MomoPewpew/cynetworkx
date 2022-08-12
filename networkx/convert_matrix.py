@@ -563,7 +563,7 @@ def from_numpy_matrix(A, parallel_edges=False, create_using=None):
     # coordinates will become the edges in the graph.
     edges = zip(*(np.asarray(A).nonzero()))
     # handle numpy constructed data type
-    if python_type is 'void':
+    if python_type == 'void':
         # Sort the fields by their offset, then by dtype, then by name.
         fields = sorted((offset, dtype, name) for name, (dtype, offset) in
                         A.dtype.fields.items())
@@ -575,7 +575,7 @@ def from_numpy_matrix(A, parallel_edges=False, create_using=None):
     # with weight 1, for each entry in the adjacency matrix. Otherwise, create
     # one edge for each positive entry in the adjacency matrix and set the
     # weight of that edge to be the entry in the matrix.
-    elif python_type is int and G.is_multigraph() and parallel_edges:
+    elif python_type == int and G.is_multigraph() and parallel_edges:
         chain = itertools.chain.from_iterable
         # The following line is equivalent to:
         #
